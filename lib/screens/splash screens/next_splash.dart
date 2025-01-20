@@ -1,3 +1,4 @@
+import 'package:fiixconn_app/screens/login/login_screen.dart';
 import 'package:flutter/material.dart';
 
 class NextScreen extends StatefulWidget {
@@ -93,6 +94,7 @@ class _NextScreenState extends State<NextScreen> {
                       ElevatedButton(
                         onPressed: () {
                           // Add functionality for Log In
+                          Navigator.push(context, MaterialPageRoute(builder: (context) => LoginScreen()));
                         },
                         style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.white, // White background

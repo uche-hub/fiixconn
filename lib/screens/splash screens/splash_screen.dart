@@ -8,11 +8,29 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 
-class _SplashScreenState extends State<SplashScreen> {
+class _SplashScreenState extends State<SplashScreen> with SingleTickerProviderStateMixin{
+
+  late AnimationController _animationController;
+  late Animation<double> _animation;
 
   @override
   void initState() {
     super.initState();
+
+    // Initialize AnimationController
+    _animationController = AnimationController(
+      vsync: this,
+      duration: const Duration(seconds: 1),
+    );
+
+    // Define Animation
+    _animation = CurvedAnimation(
+      parent: _animationController,
+      curve: Curves.easeInOut,
+    );
+
+    // Loop the animation (forward and reverse)
+    _animationController.repeat(reverse: true);
 
     // Navigate to the next screen after 3 seconds
     Future.delayed(const Duration(seconds: 3), () {
@@ -21,6 +39,12 @@ class _SplashScreenState extends State<SplashScreen> {
         MaterialPageRoute(builder: (context) => const NextScreen()),
       );
     });
+  }
+
+  @override
+  void dispose() {
+    _animationController.dispose(); // Dispose the controller
+    super.dispose();
   }
 
   @override
@@ -57,10 +81,13 @@ class _SplashScreenState extends State<SplashScreen> {
                   MainAxisAlignment.center, // Center the content vertically
               children: [
                 // Logo (replace with your asset if available)
-                Image.asset(
-                  "assets/logos/logo.png",
-                  width: screenWidth *
-                      0.50, // Responsive logo size (25% of screen width)
+                ScaleTransition(
+                  scale: _animation,
+                  child: Image.asset(
+                    "assets/logos/logo.png",
+                    width: screenWidth *
+                        0.50, // Responsive logo size (25% of screen width)
+                  ),
                 ),
                 SizedBox(height: screenHeight * 0.02), // Space below the logo
 
