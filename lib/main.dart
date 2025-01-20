@@ -1,4 +1,4 @@
-import 'package:fiixconn_app/screens/splash_screen.dart';
+import 'package:fiixconn_app/screens/splash%20screens/splash_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {

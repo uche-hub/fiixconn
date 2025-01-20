@@ -1,7 +1,27 @@
+import 'package:fiixconn_app/screens/splash%20screens/next_splash.dart';
 import 'package:flutter/material.dart';
 
-class SplashScreen extends StatelessWidget {
+class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
+
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+
+  @override
+  void initState() {
+    super.initState();
+
+    // Navigate to the next screen after 3 seconds
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const NextScreen()),
+      );
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +38,7 @@ class SplashScreen extends StatelessWidget {
               gradient: LinearGradient(
                 colors: [
                   Color(0xFF8EC5FC),
-                  Color(0xFF4FACFE)
+                  Color.fromARGB(255, 38, 120, 192)
                 ], // Gradient colors
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
